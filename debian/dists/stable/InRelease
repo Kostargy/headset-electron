@@ -1,0 +1,38 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Origin: headsetapp.co
+Codename: stable
+Date: Thu, 06 Sep 2018 16:37:13 UTC
+Architectures: amd64
+Components: non-free
+Description: Apt repository for Headset
+MD5Sum:
+ 39870715712b3e0a3f8a01e96ba38625 947 non-free/binary-amd64/Packages
+ 3740a79d344a2ee305b36278dc3c8ceb 635 non-free/binary-amd64/Packages.gz
+ daf2bc2f5c941290e81a0cb9ba4c332b 102 non-free/binary-amd64/Release
+SHA1:
+ 29214e080b088c315dad6f02cc8d4441ced77e9f 947 non-free/binary-amd64/Packages
+ 8560667c80f2ebe409a015b2d2aad66abfc56cfe 635 non-free/binary-amd64/Packages.gz
+ 9409a11a386eac89c4b96d6be7f00ddf62e9c020 102 non-free/binary-amd64/Release
+SHA256:
+ e3bc698ea0c1ed5f011659071fecf3223c18f4347a859d20f1a6d07ff21d8ba9 947 non-free/binary-amd64/Packages
+ cb831d8a9dac5b265bb2481c53bf7bb43651501ab9eb77c97ed751fdada951d9 635 non-free/binary-amd64/Packages.gz
+ ec5d3c78be91a9dc9a3c3f68b44a9e6982da8af5d2939e7c48dcc0457656956a 102 non-free/binary-amd64/Release
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQIcBAEBCAAGBQJbkVe5AAoJEFPjLDmdeC+RLesP/RFG/g63YftyQdiBECvWFjDX
+KXmdPDhoPc9tZwRD2hJ2dGgP3aMFhCgpSuVvsaYspk+mLP7obb7A51jbXvX2LxQw
+HNKmzrUg3rq6ZNdOLvWD9SKEdnJ4ZN9BbMCewFCitIj7hu4BVo0ciOXy/ID9vLW7
+sfuRN5IAGIPyMgYkLydBxM3c9putP7jMxTaIA4axyKRQQeHmo40RcYxNQtafnITR
+bdXIiX1EJFeQcmlFxATBfw5S+Y3WLVqbVx76IedT+Z8pica/hU7SdFjsM1iBzelL
+EnWglJxgbPkJSzeupk0VGPrlI/FSMFlVVUJk7qbpmrOdqeGWtsl7WRXMnTG47Fkz
+oSL2qLWZSx2wDykwGhLNWyO0X1enOCrqZmAbfr6V/AwgSB/L4p/rQmM/wR+9kUb/
+juNzEXDM8hWlDMGXlu4Gzxa8dGVJRfdG6FEJii2Ta4sR65Ybze/fRB6Du+0yOaFk
+XLGonsZRNM/Jo5bM9vcWM98Ezm+NDeAPdsDPCz2DQhwkSPz1/+vvFMj4g5n8Xp1k
+FOa5tOt0LgCmSKlNivaIUrx1f1OVp6JAU9T7SQgTX2oCgEQmtsmlp/E5tVBo4fO7
+Pxf2QpSd3NxEtKTon84B1zz0Ihny7lNirkGCxLpRbS3NP6UjjD5Ro5+kuYGSENGI
+oXFq4HroIaf10Wm30ALN
+=F4KT
+-----END PGP SIGNATURE-----

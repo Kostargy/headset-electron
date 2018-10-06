@@ -118,6 +118,9 @@ module.exports = (win, player) => {
           'mpris:length': args[1].duration * 1e6, // in microseconds
         };
         logger(['Track Info:', mprisPlayer.metadata]);
+        win.ytDownloaderData = mprisPlayer.metadata;
+        win.ytDownloaderData.videoID = args[1].id;
+        //win.webContents.send('getSongData', mprisPlayer.metadata);
         break;
       case 'seekTo': {
         const delta = Math.round(args[1] * 1e6) - mprisPlayer.position;

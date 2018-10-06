@@ -5,6 +5,7 @@ const windowStateKeeper = require('electron-window-state');
 const mprisService = require('./lib/mprisService.js');
 const registerMediaKeys = require('./lib/registerMediaKeys.js');
 const { version } = require('./package');
+const jsftp = require('jsftp');
 var YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 
@@ -20,7 +21,7 @@ const {
 
 let win;
 let player;
-
+let Ftp;
 const isDev = (process.env.NODE_ENV === 'development');
 
 logger('Running as developer: %o', isDev);
@@ -149,6 +150,41 @@ const start = () => {
     e.preventDefault();
     win.show();
   });
+
+  /*Ftp = new jsftp({
+    host: "192.168.1.3",
+    port: 3721,
+  });
+
+
+  Ftp.on('error', function(err){
+    console.log('an error accured in the ftp connection | error: ' + err);
+  });*/
+
+
+  Ftp = retryFtpConnection(Ftp);
+
+
+
+  //check ftp client
+  let connection = null;
+  setInterval(function(){
+
+    Ftp.ls('.', function(err, data) {
+      if(err) {
+        console.log("Server not available through FTP. Error:" + err);
+        connection = false;
+        Ftp = retryFtpConnection(Ftp);
+      }else{
+        connection = true;
+        console.log('Connection with remote ftp server ok');
+      }
+      win.webContents.send('checkFtpConnection', {status:200, isConnected: connection});
+    });
+
+  },5000);
+
+
 }; // end start
 
 app.on('activate', () => win.show());
@@ -177,13 +213,18 @@ ipcMain.on('downloadSong', function(e, args){
       "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
       "progressTimeout": 2000                 // How long should be the interval of the progress reports
   });
-
+  if(Ftp){
+    Ftp.ls(".", (err, res) => {
+      res.forEach(file => console.log(file));
+    });
+  }
   if(win.ytDownloaderData){
 
     YD.download(win.ytDownloaderData.videoID);
 
     YD.on("finished", function(err, data) {
       console.log(JSON.stringify(data));
+      let songPath = data.file;
       win.webContents.send('downloadSong', {status:200, msg:'Success'});
     });
 
@@ -212,3 +253,17 @@ ipcMain.on('player2Win', (e, args) => {
     win.webContents.send('player2Win', args);
   } catch (err) { /* window already closed */ }
 });
+
+function retryFtpConnection(connection){
+  connection = new jsftp({
+    host: "192.168.1.3",
+    port: 3721,
+  });
+
+
+  connection.on('error', function(err){
+    console.log('an error accured in the ftp connection | error: ' + err);
+  });
+
+  return connection;
+}

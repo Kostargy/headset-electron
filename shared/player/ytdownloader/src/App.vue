@@ -1,11 +1,16 @@
 <template>
-  <div id="module-container" @click='downloadSong'>
-    <i class="fas fa-download"></i>
+  <div id="module-container">
+    <i class="fas fa-download"  @click='downloadSong'></i>
+    <span class="connection" v-show='!connected'><i class="far fa-circle red-dot"></i>Mobile OFF</span>
+    <span class="connection" v-show='connected'><i class="far fa-dot-circle green-dot"></i>Mobile ON</span>
     <div class="ytdownloader" v-show='showModal'>
       <div class="close-modal" @click.stop='closeModal'>
         <i class="fas fa-times"></i>
       </div>
-      <div class="">
+      <div class="settings" @click.stop='showSettings'>
+        <i class="fas fa-cogs"></i>
+      </div>
+      <div class="download-progress">
         <div class="percentage">
           {{progress}}%
         </div>
@@ -28,6 +33,7 @@ export default {
       progress: 0,
       error_msg: null,
       showSnackbar: false,
+      connected: false,
     }
   },
   methods: {
@@ -59,6 +65,14 @@ export default {
       console.log(args);
       self.progress = args.progress.percentage.toFixed(2);
     });
+    ipcRenderer.on('checkFtpConnection', function(e,args){
+      console.log(args);
+      if(args.status == 200){
+        self.connected = args.isConnected;
+      }else{
+        self.connected = false;
+      }
+    });
   }
 }
 </script>
@@ -88,14 +102,47 @@ export default {
   box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
   border-top: solid 1px red;
 }
-
+.download-progress{
+  position: absolute;
+  width: 244px;
+  left: 2px;
+  top: 50px;
+}
 .close-modal > i{
   float: right;
   margin-right: 7px;
   margin-top: 3px;
 }
-
+.connection{
+  position: absolute;
+  display: inline-flex;
+  font-size: 12px;
+  margin-left: 12px;
+  margin-top: 1px;
+  width: 100px;
+  /* height: 22px; */
+  font-weight: bold;
+}
+.connection > i {
+  margin-right: 4px;
+  line-height: 19px;
+}
+.red-dot{
+  color: red;
+}
+.green-dot{
+  color: #00ff00;
+}
 .close-modal > i:hover{
+  /*color: #5D7076;*/
+  cursor: pointer;
+}
+.settings > i{
+  float: right;
+  margin-right: 7px;
+  margin-top: 3px;
+}
+.settings > i:hover{
   /*color: #5D7076;*/
   cursor: pointer;
 }
